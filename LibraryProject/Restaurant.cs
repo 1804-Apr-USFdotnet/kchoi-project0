@@ -14,5 +14,17 @@ namespace LibraryProject
         public string City { get; set; }
         public string State { get; set; }
         public long ZIP { get; set; }
+
+        public Restaurant()
+        {
+            Reviews = new List<Review>();
+        }
+
+        public bool AddReview(Review NewReview)
+        {
+            int count = Reviews.Count;
+            Reviews.Add(NewReview);
+            return Reviews.Count == count + 1;
+        }
     }
 }

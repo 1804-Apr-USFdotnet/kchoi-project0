@@ -72,5 +72,13 @@ namespace Project0Test
             res.PhoneNum = phoneNum;
             Assert.AreEqual(phoneNum, res.PhoneNum);
         }
+
+        [TestMethod]
+        public void TestRestaurantAddReview()
+        {
+            Restaurant res = new Restaurant();
+            Review rev = new Review();
+            Assert.IsTrue(res.AddReview(rev));
+        }
     }
 }
