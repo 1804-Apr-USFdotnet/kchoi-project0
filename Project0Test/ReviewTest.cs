@@ -8,21 +8,27 @@ namespace Project0Test
     [TestClass]
     public class ReviewTest
     {
+        Review review;
+        const string desc = "This review is a fake.";
+        const int rating = 5;
+
         [TestMethod]
         public void TestReviewRating()
         {
-            Review review = new Review();
-            int rating = 5;
-            review.Rating = rating;
+            review = new Review
+            {
+                Rating = rating
+            };
             Assert.AreEqual(review.Rating, rating);
         }
 
         [TestMethod]
         public void TestReviewDescription()
         {
-            Review review = new Review();
-            string desc = "This review is a fake.";
-            review.Description = desc;
+            review = new Review
+            {
+                Description = desc
+            };
             Assert.AreEqual(review.Description, desc);
         }
     }

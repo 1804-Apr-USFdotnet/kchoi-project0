@@ -9,46 +9,57 @@ namespace Project0Test
     [TestClass]
     public class RestaurantTest
     {
+        Restaurant res;
+        const string address = "1600 Pennsylvania Ave";
+        const string city = "Washington";
+        const string state = "DC";
+        const long zip = 20500;
+        const string phoneNum = "555-555-5555";
+
         [TestMethod]
         public void TestRestaurantAddress()
         {
-            Restaurant res = new Restaurant();
-            string address = "1600 Pennsylvania Ave";
-            res.Address = address;
+            res = new Restaurant
+            {
+                Address = address
+            };
             Assert.AreEqual(res.Address, address);
         }
 
         [TestMethod]
         public void TestRestaurantCity()
         {
-            Restaurant res = new Restaurant();
-            string city = "Washington";
-            res.City = city;
+            res = new Restaurant
+            {
+                City = city
+            };
             Assert.AreEqual(city, res.City);
         }
 
         [TestMethod]
         public void TestRestaurantState()
         {
-            Restaurant res = new Restaurant();
-            string state = "DC";
-            res.State = state;
+            res = new Restaurant
+            {
+                State = state
+            };
             Assert.AreEqual(res.State, state);
         }
 
         [TestMethod]
         public void TestRestaurantZIP()
         {
-            Restaurant res = new Restaurant();
-            long zip = 20500;
-            res.ZIP = zip;
+            res = new Restaurant
+            {
+                ZIP = zip
+            };
             Assert.AreEqual(zip, res.ZIP);
         }
 
         [TestMethod]
         public void TestRestaurantReviews()
         {
-            Restaurant res = new Restaurant
+            res = new Restaurant
             {
                 Reviews = new List<Review>()
             };
@@ -67,18 +78,39 @@ namespace Project0Test
         [TestMethod]
         public void TestRestaurantPhoneNum()
         {
-            Restaurant res = new Restaurant();
-            string phoneNum = "555-555-5555";
-            res.PhoneNum = phoneNum;
+            res = new Restaurant
+            {
+                PhoneNum = phoneNum
+            };
             Assert.AreEqual(phoneNum, res.PhoneNum);
         }
 
         [TestMethod]
         public void TestRestaurantAddReview()
         {
-            Restaurant res = new Restaurant();
+            res = new Restaurant();
             Review rev = new Review();
-            Assert.IsTrue(res.AddReview(rev));
+            if (!res.AddReview(rev))
+            {
+                Assert.Fail("failed to add review");
+            } else
+            {
+                Assert.AreEqual(rev, res.Reviews[0]);
+            }
+        }
+
+        [TestMethod]
+        public void TestRestaurantAddTag()
+        {
+            res = new Restaurant();
+            string tag = "fake";
+            if (!res.AddTag(tag))
+            {
+                Assert.Fail("failed to add tag");
+            } else
+            {
+                Assert.AreEqual(tag, res.Tags[0]);
+            }
         }
     }
 }
