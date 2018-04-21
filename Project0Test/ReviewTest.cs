@@ -22,7 +22,7 @@ namespace Project0Test
             Review review = new Review();
             string desc = "This review is a fake.";
             review.Description = desc;
-            Assert.IsTrue(review.Description != null && review.Description.Equals(desc));
+            Assert.AreEqual(review.Description, desc);
         }
     }
 }
