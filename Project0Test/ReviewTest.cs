@@ -12,8 +12,9 @@ namespace Project0Test
         public void TestReviewRating()
         {
             Review review = new Review();
-            review.Rating = 5;
-            Assert.AreEqual(review.Rating, 5);
+            int rating = 5;
+            review.Rating = rating;
+            Assert.AreEqual(review.Rating, rating);
         }
 
         [TestMethod]
