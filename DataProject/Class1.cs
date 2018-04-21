@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataProject
 {
-    public class Review
+    public class Class1
     {
-        public int Rating { get; set; }
-        public string Description { get; set; }
     }
 }

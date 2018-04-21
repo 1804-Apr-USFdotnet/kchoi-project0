@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using DataProject;
+using LibraryProject;
 
 namespace Project0Test
 {

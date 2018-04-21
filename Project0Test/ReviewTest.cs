@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using DataProject;
+using LibraryProject;
 
 namespace Project0Test
 {

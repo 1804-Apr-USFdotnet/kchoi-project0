@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace LibraryProject
 {
-    public class Class1
+    public class Review
     {
+        public int Rating { get; set; }
+        public string Description { get; set; }
     }
 }
