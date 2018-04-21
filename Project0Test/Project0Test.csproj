@@ -51,6 +51,7 @@
     <Compile Include="RestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewTest.cs" />
+    <Compile Include="ReviewerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
