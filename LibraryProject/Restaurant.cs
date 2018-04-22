@@ -15,7 +15,7 @@ namespace LibraryProject
         public string PhoneNum { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public long ZIP { get; set; }
+        public string ZIP { get; set; }
         public List<string> Tags { get; set; }
 
         public Restaurant()

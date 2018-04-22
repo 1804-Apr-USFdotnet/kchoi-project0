@@ -13,7 +13,7 @@ namespace Project0Test
         const string address = "1600 Pennsylvania Ave";
         const string city = "Washington";
         const string state = "DC";
-        const long zip = 20500;
+        const string zip = "20500";
         const string phoneNum = "555-555-5555";
 
         [TestMethod]
