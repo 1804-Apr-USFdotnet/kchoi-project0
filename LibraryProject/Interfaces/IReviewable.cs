@@ -9,5 +9,6 @@ namespace LibraryProject.Interfaces
     interface IReviewable
     {
         bool AddReview(Review NewReview);
+        float GetAvgRating();
     }
 }

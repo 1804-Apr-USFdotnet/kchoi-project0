@@ -38,5 +38,17 @@ namespace LibraryProject
             Tags.Add(NewTag);
             return Tags.Count == count + 1;
         }
+
+        public float GetAvgRating()
+        {
+            float sum = 0f;
+
+            foreach (var i in Reviews)
+            {
+                sum += i.Rating;
+            }
+
+            return sum / Reviews.Count;
+        }
     }
 }

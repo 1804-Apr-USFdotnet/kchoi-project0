@@ -112,5 +112,23 @@ namespace Project0Test
                 Assert.AreEqual(tag, res.Tags[0]);
             }
         }
+
+        [TestMethod]
+        public void TestRestaurantAvgReview()
+        {
+            res = new Restaurant();
+            float avg = 0f;
+            for(int i = 1; i <= 5; i++)
+            {
+                Review rev = new Review
+                {
+                    Rating = i
+                };
+                res.AddReview(rev);
+                avg += i;
+            }
+            avg /= 5f;
+            Assert.AreEqual(avg, res.GetAvgRating());
+        }
     }
 }
