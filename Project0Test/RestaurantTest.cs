@@ -10,11 +10,22 @@ namespace Project0Test
     public class RestaurantTest
     {
         Restaurant res;
+        const int id = 0;
         const string address = "1600 Pennsylvania Ave";
         const string city = "Washington";
         const string state = "DC";
         const string zip = "20500";
         const string phoneNum = "555-555-5555";
+
+        [TestMethod]
+        public void TestRestaurantID()
+        {
+            res = new Restaurant
+            {
+                RestaurantID = id
+            };
+            Assert.AreEqual(res.RestaurantID, id);
+        }
 
         [TestMethod]
         public void TestRestaurantAddress()

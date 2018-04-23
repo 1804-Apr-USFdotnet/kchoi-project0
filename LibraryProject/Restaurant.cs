@@ -10,6 +10,7 @@ namespace LibraryProject
 {
     public class Restaurant : ITaggable, IReviewable
     {
+        public int RestaurantID { get; set; }
         public string Address { get; set; }
         public List<Review> Reviews { get; set; }
         public string PhoneNum { get; set; }
