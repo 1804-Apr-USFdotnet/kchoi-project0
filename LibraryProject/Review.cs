@@ -8,27 +8,37 @@ namespace LibraryProject
 {
     public class Review
     {
-        public int Rating {
+        private int _rating;
+        private string _description;
+
+        public int Rating
+        {
             get
             {
-                return Rating;
+                return _rating;
             }
-            set
+            private set
             {
                 if (value < 0)
                 {
-                    Rating = 0;
+                    _rating = 0;
                 }
                 else if (value > 5)
                 {
-                    Rating = 5;
+                    _rating = 5;
                 }
                 else
                 {
-                    Rating = value;
+                    _rating = value;
                 }
             }
         }
-        public string Description { get; set; }
+        public string Description { get => _description; private set => _description = value; }
+
+        public Review(int rating, string desc)
+        {
+            Rating = rating;
+            Description = desc;
+        }
     }
 }
