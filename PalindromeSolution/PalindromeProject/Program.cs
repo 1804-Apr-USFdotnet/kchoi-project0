@@ -10,7 +10,9 @@ namespace PalindromeProject
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(StripString("never Odd, or Even."));
+            Console.WriteLine("type in a string:");
+            string testString = Console.ReadLine();
+            Console.WriteLine(($"\"{testString}\" ") + (CheckPalindrome(testString) ? "is" : "is not" ) + " a palindrome");
         }
 
         public static string StripString(string myString)
