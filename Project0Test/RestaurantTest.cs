@@ -10,76 +10,58 @@ namespace Project0Test
     public class RestaurantTest
     {
         Restaurant res;
+        Review rev;
         const int id = 0;
         const string address = "1600 Pennsylvania Ave";
         const string city = "Washington";
         const string state = "DC";
         const string zip = "20500";
         const string phoneNum = "555-555-5555";
+        const string name = "White House";
+        const int rating = 5;
+        const string desc = "this is a fake review";
 
         [TestMethod]
         public void TestRestaurantID()
         {
-            res = new Restaurant
-            {
-                RestaurantID = id
-            };
-            Assert.AreEqual(res.RestaurantID, id);
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
+            Assert.AreEqual(res.ID, id);
         }
 
         [TestMethod]
         public void TestRestaurantAddress()
         {
-            res = new Restaurant
-            {
-                Address = address
-            };
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
             Assert.AreEqual(res.Address, address);
         }
 
         [TestMethod]
         public void TestRestaurantCity()
         {
-            res = new Restaurant
-            {
-                City = city
-            };
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
             Assert.AreEqual(city, res.City);
         }
 
         [TestMethod]
         public void TestRestaurantState()
         {
-            res = new Restaurant
-            {
-                State = state
-            };
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
             Assert.AreEqual(res.State, state);
         }
 
         [TestMethod]
         public void TestRestaurantZIP()
         {
-            res = new Restaurant
-            {
-                ZIP = zip
-            };
-            Assert.AreEqual(zip, res.ZIP);
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
+            Assert.AreEqual(zip, res.Zip);
         }
 
         [TestMethod]
         public void TestRestaurantReviews()
         {
-            res = new Restaurant
-            {
-                Reviews = new List<Review>()
-            };
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
             int rating = 5;
-            Review rev = new Review
-            {
-                Rating = rating,
-                Description = "this is a fake description"
-            };
+            rev = new Review(rating, desc);
 
             res.Reviews.Add(rev);
 
@@ -89,18 +71,15 @@ namespace Project0Test
         [TestMethod]
         public void TestRestaurantPhoneNum()
         {
-            res = new Restaurant
-            {
-                PhoneNum = phoneNum
-            };
-            Assert.AreEqual(phoneNum, res.PhoneNum);
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
+            Assert.AreEqual(phoneNum, res.Phone);
         }
 
         [TestMethod]
         public void TestRestaurantAddReview()
         {
-            res = new Restaurant();
-            Review rev = new Review();
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
+            rev = new Review(rating, desc);
             if (!res.AddReview(rev))
             {
                 Assert.Fail("failed to add review");
@@ -113,7 +92,7 @@ namespace Project0Test
         [TestMethod]
         public void TestRestaurantAddTag()
         {
-            res = new Restaurant();
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
             string tag = "fake";
             if (!res.AddTag(tag))
             {
@@ -127,14 +106,11 @@ namespace Project0Test
         [TestMethod]
         public void TestRestaurantAvgReview()
         {
-            res = new Restaurant();
+            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
             float avg = 0f;
             for(int i = 1; i <= 5; i++)
             {
-                Review rev = new Review
-                {
-                    Rating = i
-                };
+                rev = new Review(rating, desc);
                 res.AddReview(rev);
                 avg += i;
             }

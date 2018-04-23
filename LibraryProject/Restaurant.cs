@@ -10,18 +10,37 @@ namespace LibraryProject
 {
     public class Restaurant : ITaggable, IReviewable
     {
-        public int RestaurantID { get; set; }
-        public string Address { get; set; }
-        public List<Review> Reviews { get; set; }
-        public string PhoneNum { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZIP { get; set; }
-        public List<string> Tags { get; set; }
-        public string Name { get; set; }
+        private int _id;
+        private string _address;
+        private string _phone;
+        private string _city;
+        private string _state;
+        private string _zip;
+        private string _name;
 
-        public Restaurant()
+        private List<Review> _reviews;
+        private List<string> _tags;
+
+        public int ID { get => _id; private set => _id = value; }
+        public string Address { get => _address; private set => _address = value; }
+        public string Phone { get => _phone; private set => _phone = value; }
+        public string City { get => _city; private set => _city = value; }
+        public string State { get => _state; private set => _state = value; }
+        public string Zip { get => _zip; private set => _zip = value; }
+        public string Name { get => _name; private set => _name = value; }
+
+        public List<Review> Reviews { get => _reviews; private set => _reviews = value; }
+        public List<string> Tags { get => _tags; private set => _tags = value; }
+
+        public Restaurant(int id, string address, string phone, string city, string state, string zip, string name)
         {
+            ID = id;
+            Address = address;
+            Phone = phone;
+            _city = city;
+            State = state;
+            Zip = zip;
+            Name = name;
             Reviews = new List<Review>();
             Tags = new List<string>();
         }
