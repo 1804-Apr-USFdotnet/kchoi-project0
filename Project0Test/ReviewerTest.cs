@@ -15,18 +15,14 @@ namespace Project0Test
         [TestMethod]
         public void TestReviewerName()
         {
-            reviewer = new Reviewer();
-            reviewer.Name = name;
+            reviewer = new Reviewer(0, name);
             Assert.AreEqual(reviewer.Name, name);
         }
 
         [TestMethod]
         public void TestReviewerID()
         {
-            reviewer = new Reviewer()
-            {
-                ID = id
-            };
+            reviewer = new Reviewer(0, name);
             Assert.AreEqual(reviewer.ID, id);
         }
     }
