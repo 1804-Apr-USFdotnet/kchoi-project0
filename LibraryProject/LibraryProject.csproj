@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serializer.cs" />
     <Compile Include="Interfaces\IReviewable.cs" />
     <Compile Include="Interfaces\ITaggable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
