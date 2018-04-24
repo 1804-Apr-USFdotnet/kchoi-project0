@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +31,9 @@ namespace LibraryProject
         public string Zip { get => _zip; private set => _zip = value; }
         public string Name { get => _name; private set => _name = value; }
 
+        [JsonIgnore]
         public List<Review> Reviews { get => _reviews; private set => _reviews = value; }
+        [JsonIgnore]
         public List<string> Tags { get => _tags; private set => _tags = value; }
 
         public Restaurant(int id, string address, string phone, string city, string state, string zip, string name)
