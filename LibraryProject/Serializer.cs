@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +10,37 @@ namespace LibraryProject
 {
     public static class Serializer
     {
-        public static void Serialize(string fileName, params object[] obj)
+        public static void SerializeList<T>(string fileName, List<T> objList)
         {
-            string json;
-
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(fileName, true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, true))
             {
-                foreach (var i in obj)
+                foreach (T obj in objList)
                 {
-                    json = JsonConvert.SerializeObject(obj);
-                    file.WriteLine(json);
+                    file.WriteLine(JsonConvert.SerializeObject(obj));
                 }
             }
-
         }
 
-        public static List<T> Deserialize<T>(string fileName)
+        public static void Serialize<T>(string fileName, T obj)
         {
-            string json = System.IO.File.ReadAllText(fileName);
-            return JsonConvert.DeserializeObject<List<T>>(json);
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, true))
+            {
+                file.WriteLine(JsonConvert.SerializeObject(obj));
+            }
+        }
+
+        public static List<T> DeserializeList<T>(string fileName)
+        {
+            List<T> result = new List<T>();
+
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(fileName))
+            {
+                while (!reader.EndOfStream)
+                {
+                    result.Add(JsonConvert.DeserializeObject<T>(reader.ReadLine()));
+                }
+            }
+            return result;
         }
     }
 }

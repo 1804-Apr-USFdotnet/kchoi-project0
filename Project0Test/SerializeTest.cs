@@ -14,16 +14,38 @@ namespace Project0Test
         public void TestDeserializeRestaurants()
         {
             string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"];
-            List<Restaurant> list = Serializer.Deserialize<Restaurant>(filePath);
-            Assert.IsTrue(list.Count > 0);
+            int numEntries = 0;
+            using(System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
+            {
+                while(!reader.EndOfStream)
+                {
+                    reader.ReadLine();
+                    numEntries++;
+                }
+            }
+
+            List<Restaurant> list = Serializer.DeserializeList<Restaurant>(filePath);
+
+            Assert.AreEqual(list.Count, numEntries);
         }
 
         [TestMethod]
         public void TestDeserializeReviews()
         {
             string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["ReviewsFile"];
-            List<Review> list = Serializer.Deserialize<Review>(filePath);
-            Assert.IsTrue(list.Count > 0);
+            int numEntries = 0;
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    reader.ReadLine();
+                    numEntries++;
+                }
+            }
+
+            List<Review> list = Serializer.DeserializeList<Review>(filePath);
+
+            Assert.AreEqual(list.Count, numEntries);
         }
 
         [TestMethod]
