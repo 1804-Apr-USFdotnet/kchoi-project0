@@ -20,6 +20,8 @@ namespace LibraryProject
         private string _zip;
         private string _name;
 
+        private float _avgRating;
+
         private List<Review> _reviews;
         private List<string> _tags;
 
@@ -30,6 +32,8 @@ namespace LibraryProject
         public string State { get => _state; private set => _state = value; }
         public string Zip { get => _zip; private set => _zip = value; }
         public string Name { get => _name; private set => _name = value; }
+
+        public float AvgRating { get => _avgRating; }
 
         [JsonIgnore]
         public List<Review> Reviews { get => _reviews; private set => _reviews = value; }
@@ -51,9 +55,19 @@ namespace LibraryProject
 
         public bool AddReview(Review NewReview)
         {
+            bool result;
             int count = Reviews.Count;
+
             Reviews.Add(NewReview);
-            return Reviews.Count == count + 1;
+
+            if ((result = Reviews.Count == count + 1))
+            {
+                _avgRating *= count;
+                _avgRating += NewReview.Rating;
+                _avgRating /= (count + 1);
+            }
+
+            return result;
         }
 
         public bool AddTag(string NewTag)
@@ -61,18 +75,6 @@ namespace LibraryProject
             int count = Tags.Count;
             Tags.Add(NewTag);
             return Tags.Count == count + 1;
-        }
-
-        public float GetAvgRating()
-        {
-            float sum = 0f;
-
-            foreach (var i in Reviews)
-            {
-                sum += i.Rating;
-            }
-
-            return sum / Reviews.Count;
         }
     }
 }
