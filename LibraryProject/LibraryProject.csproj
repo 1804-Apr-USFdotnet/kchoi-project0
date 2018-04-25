@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Serializer.cs" />
     <Compile Include="Interfaces\IReviewable.cs" />
-    <Compile Include="Interfaces\ITaggable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restaurant.cs" />
     <Compile Include="Review.cs" />
