@@ -100,16 +100,19 @@ namespace Project0Test
         [TestMethod]
         public void TestRestaurantAvgReview()
         {
-            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
-            float avg = 0f;
-            for(int i = 1; i <= 5; i++)
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"]))
             {
-                rev = new Review(rating, desc);
-                res.AddReview(rev);
-                avg += i;
+                testRestaurant = JsonConvert.DeserializeObject<Restaurant>(reader.ReadLine());
             }
-            avg /= 5f;
-            Assert.AreEqual(avg, res.GetAvgRating());
+            testRestaurant.RecalculateAvgRating();
+            float testAvg = testRestaurant.AvgRating;
+            float expectedAvg = 0f;
+            foreach(Review i in testRestaurant.Reviews)
+            {
+                expectedAvg += i.Rating;
+            }
+            expectedAvg /= testRestaurant.Reviews.Count;
+            Assert.AreEqual(expectedAvg, testRestaurant.AvgRating);
         }
     }
 }

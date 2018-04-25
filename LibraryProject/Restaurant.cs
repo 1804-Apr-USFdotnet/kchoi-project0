@@ -20,9 +20,9 @@ namespace LibraryProject
         private string _zip;
         private string _name;
 
-        private float _avgRating;
+        private List<Review> _reviews = new List<Review>();
 
-        private List<Review> _reviews;
+        private float _avgRating;
 
         public int ID { get => _id; set => _id = value; }
         public string Address { get => _address; set => _address = value; }
@@ -32,10 +32,10 @@ namespace LibraryProject
         public string Zip { get => _zip; set => _zip = value; }
         public string Name { get => _name; set => _name = value; }
 
-        public float AvgRating { get => _avgRating; }
+        public List<Review> Reviews { get => _reviews; set => _reviews = value; }
 
         [JsonIgnore]
-        public List<Review> Reviews { get => _reviews; private set => _reviews = value; }
+        public float AvgRating { get => _avgRating; }
 
         public bool AddReview(Review NewReview)
         {
