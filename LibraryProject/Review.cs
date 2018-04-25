@@ -37,11 +37,27 @@ namespace LibraryProject
         }
         public string Description { get => _description; set => _description = value; }
 
-        public bool Equals(Review obj)
+        public override bool Equals(object obj)
         {
-            return ReviewerName.Equals(obj.ReviewerName)
-                && Rating.Equals(obj.Rating)
-                && Description.Equals(obj.Description);
+            bool result = true;
+            Review testObj = null;
+
+            try
+            {
+                testObj = (Review)obj;
+            } catch(InvalidCastException e)
+            {
+                result = false;
+            }
+
+            if (result)
+            {
+                result = ReviewerName.Equals(testObj.ReviewerName)
+                  && Rating.Equals(testObj.Rating)
+                  && Description.Equals(testObj.Description);
+            }
+
+            return result;
         }
     }
 }

@@ -14,10 +14,26 @@ namespace LibraryProject
         public string Name { get => _name; set => _name = value; }
         public int ID { get => _id; set => _id = value; }
 
-        public bool Equals(Reviewer obj)
+        public override bool Equals(object obj)
         {
-            return Name.Equals(obj.Name)
-                && ID.Equals(obj.ID);
+            bool result = true;
+            Reviewer testObj = null;
+
+            try
+            {
+                testObj = (Reviewer)obj;
+            } catch(InvalidCastException e)
+            {
+                result = false;
+            }
+
+            if (result)
+            {
+                result = Name.Equals(testObj.Name)
+                    && ID.Equals(testObj.ID);
+            }
+
+            return result;
         }
     }
 }

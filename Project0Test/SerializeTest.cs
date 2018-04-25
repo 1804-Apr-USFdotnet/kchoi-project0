@@ -22,23 +22,23 @@ namespace Project0Test
 
             List<Restaurant> list = Serializer.DeserializeList<Restaurant>(filePath);
 
-            Assert.IsTrue(list[0].Equals(expectedRestaurant));
+            Assert.AreEqual(list[0], expectedRestaurant);
         }
 
         [TestMethod]
         public void TestSerializeRestaurant()
         {
-            string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"];
+            string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["TestFile"];
             Restaurant expectedRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
 
-            Serializer.SerializeAndWrite<Restaurant>(filePath, testRestaurant, true);
+            Serializer.SerializeAndWrite<Restaurant>(filePath, expectedRestaurant, true);
 
             Restaurant verifyRestaurant;
             using (System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
             {
                 verifyRestaurant = JsonConvert.DeserializeObject<Restaurant>(reader.ReadLine());
             }
-            Assert.IsTrue(verifyRestaurant.Equals(testRestaurant));
+            Assert.AreEqual(verifyRestaurant, expectedRestaurant);
         }
     }
 }

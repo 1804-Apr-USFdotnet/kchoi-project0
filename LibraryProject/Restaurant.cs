@@ -66,32 +66,46 @@ namespace LibraryProject
             _avgRating /= Reviews.Count;
         }
 
-        public bool Equals(Restaurant obj)
+        public override bool Equals(object obj)
         {
-            bool result = ID.Equals(obj.ID)
-                && Address.Equals(obj.Address)
-                && Phone.Equals(obj.Phone)
-                && City.Equals(obj.City)
-                && State.Equals(obj.State)
-                && Zip.Equals(obj.Zip)
-                && Name.Equals(obj.Name);
+            bool result = true;
+            Restaurant testObj = null;
+
+            try
+            {
+                testObj = (Restaurant)obj;
+            } catch (InvalidCastException e)
+            {
+                result = false;
+            }
 
             if (result)
             {
-                for (int i = 0; i < Reviews.Count; i++)
+                result = ID.Equals(testObj.ID)
+                    && Address.Equals(testObj.Address)
+                    && Phone.Equals(testObj.Phone)
+                    && City.Equals(testObj.City)
+                    && State.Equals(testObj.State)
+                    && Zip.Equals(testObj.Zip)
+                    && Name.Equals(testObj.Name);
+
+                if (result)
                 {
-                    if (obj.Reviews[i] != null)
+                    for (int i = 0; i < Reviews.Count; i++)
                     {
-                        if (!Reviews[i].Equals(obj.Reviews[i]))
+                        if (testObj.Reviews[i] != null)
+                        {
+                            if (!Reviews[i].Equals(testObj.Reviews[i]))
+                            {
+                                result = false;
+                                break;
+                            }
+                        }
+                        else
                         {
                             result = false;
                             break;
                         }
-                    }
-                    else
-                    {
-                        result = false;
-                        break;
                     }
                 }
             }
