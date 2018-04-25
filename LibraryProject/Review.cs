@@ -8,9 +8,11 @@ namespace LibraryProject
 {
     public class Review
     {
+        private string _reviewerName;
         private int _rating;
         private string _description;
 
+        public string ReviewerName { get => _reviewerName; set => _reviewerName = value; }
         public int Rating
         {
             get
@@ -34,5 +36,12 @@ namespace LibraryProject
             }
         }
         public string Description { get => _description; set => _description = value; }
+
+        public bool Equals(Review obj)
+        {
+            return ReviewerName.Equals(obj.ReviewerName)
+                && Rating.Equals(obj.Rating)
+                && Description.Equals(obj.Description);
+        }
     }
 }

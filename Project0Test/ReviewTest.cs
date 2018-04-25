@@ -11,7 +11,7 @@ namespace Project0Test
     public class ReviewTest
     {
         Review testReview;
-        const string testReviewJSON = @"{'Rating':3,'Description':'This is a fake review.'}";
+        const string testReviewJSON = @"{'ReviewerName':'Perry Van Bruggen','Rating':3,'Description':'This is a fake review.'}";
 
         [TestMethod]
         public void TestReviewRating()
@@ -25,6 +25,13 @@ namespace Project0Test
         {
             testReview = JsonConvert.DeserializeObject<Review>(testReviewJSON);
             Assert.AreEqual(testReview.Description, "This is a fake review.");
+        }
+
+        [TestMethod]
+        public void TestReviewReviewerName()
+        {
+            testReview = JsonConvert.DeserializeObject<Review>(testReviewJSON);
+            Assert.AreEqual(testReview.ReviewerName, "Perry Van Bruggen");
         }
     }
 }
