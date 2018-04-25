@@ -10,7 +10,7 @@ using LibraryProject.Interfaces;
 
 namespace LibraryProject
 {
-    public class Restaurant : ITaggable, IReviewable
+    public class Restaurant : IReviewable
     {
         private int _id;
         private string _address;
@@ -66,13 +66,6 @@ namespace LibraryProject
             }
 
             return result;
-        }
-
-        public bool AddTag(string NewTag)
-        {
-            int count = Tags.Count;
-            Tags.Add(NewTag);
-            return Tags.Count == count + 1;
         }
     }
 }
