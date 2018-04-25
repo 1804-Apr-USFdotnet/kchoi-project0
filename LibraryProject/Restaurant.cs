@@ -54,6 +54,18 @@ namespace LibraryProject
             return result;
         }
 
+        public void RecalculateAvgRating()
+        {
+            _avgRating = 0f;
+
+            foreach(Review review in Reviews)
+            {
+                _avgRating += review.Rating;
+            }
+
+            _avgRating /= Reviews.Count;
+        }
+
         public bool Equals(Restaurant obj)
         {
             bool result = ID.Equals(obj.ID)
