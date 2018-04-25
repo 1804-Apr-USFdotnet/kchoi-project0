@@ -17,7 +17,7 @@ namespace LibraryProject
             {
                 return _rating;
             }
-            private set
+            set
             {
                 if (value < 0)
                 {
@@ -33,12 +33,6 @@ namespace LibraryProject
                 }
             }
         }
-        public string Description { get => _description; private set => _description = value; }
-
-        public Review(int rating, string desc)
-        {
-            Rating = rating;
-            Description = desc;
-        }
+        public string Description { get => _description; set => _description = value; }
     }
 }

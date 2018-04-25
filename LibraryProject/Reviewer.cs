@@ -11,13 +11,7 @@ namespace LibraryProject
         private string _name;
         private int _id;
         
-        public string Name { get => _name; private set => _name = value; }
-        public int ID { get => _id; private set => _id = value; }
-
-        public Reviewer(int id, string name)
-        {
-            ID = id;
-            Name = name;
-        }
+        public string Name { get => _name; set => _name = value; }
+        public int ID { get => _id; set => _id = value; }
     }
 }
