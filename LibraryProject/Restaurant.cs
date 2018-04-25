@@ -53,5 +53,38 @@ namespace LibraryProject
 
             return result;
         }
+
+        public bool Equals(Restaurant obj)
+        {
+            bool result = ID.Equals(obj.ID)
+                && Address.Equals(obj.Address)
+                && Phone.Equals(obj.Phone)
+                && City.Equals(obj.City)
+                && State.Equals(obj.State)
+                && Zip.Equals(obj.Zip)
+                && Name.Equals(obj.Name);
+
+            if (result)
+            {
+                for (int i = 0; i < Reviews.Count; i++)
+                {
+                    if (obj.Reviews[i] != null)
+                    {
+                        if (!Reviews[i].Equals(obj.Reviews[i]))
+                        {
+                            result = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
