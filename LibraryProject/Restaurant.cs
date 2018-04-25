@@ -23,7 +23,6 @@ namespace LibraryProject
         private float _avgRating;
 
         private List<Review> _reviews;
-        private List<string> _tags;
 
         public int ID { get => _id; private set => _id = value; }
         public string Address { get => _address; private set => _address = value; }
@@ -37,8 +36,7 @@ namespace LibraryProject
 
         [JsonIgnore]
         public List<Review> Reviews { get => _reviews; private set => _reviews = value; }
-        [JsonIgnore]
-        public List<string> Tags { get => _tags; private set => _tags = value; }
+
 
         public Restaurant(int id, string address, string phone, string city, string state, string zip, string name)
         {

@@ -90,20 +90,6 @@ namespace Project0Test
         }
 
         [TestMethod]
-        public void TestRestaurantAddTag()
-        {
-            res = new Restaurant(id, address, phoneNum, city, state, zip, name);
-            string tag = "fake";
-            if (!res.AddTag(tag))
-            {
-                Assert.Fail("failed to add tag");
-            } else
-            {
-                Assert.AreEqual(tag, res.Tags[0]);
-            }
-        }
-
-        [TestMethod]
         public void TestRestaurantAvgReview()
         {
             res = new Restaurant(id, address, phoneNum, city, state, zip, name);
