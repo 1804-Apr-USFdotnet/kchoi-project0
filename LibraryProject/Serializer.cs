@@ -10,9 +10,9 @@ namespace LibraryProject
 {
     public static class Serializer
     {
-        public static void SerializeList<T>(string fileName, List<T> objList)
+        public static void SerializeAndWriteList<T>(string fileName, List<T> objList, bool overwrite)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, !overwrite))
             {
                 foreach (T obj in objList)
                 {
@@ -21,9 +21,9 @@ namespace LibraryProject
             }
         }
 
-        public static void Serialize<T>(string fileName, T obj)
+        public static void SerializeAndWrite<T>(string fileName, T obj, bool overwrite)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, !overwrite))
             {
                 file.WriteLine(JsonConvert.SerializeObject(obj));
             }
