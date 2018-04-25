@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using LibraryProject;
@@ -8,22 +10,21 @@ namespace Project0Test
     [TestClass]
     public class ReviewTest
     {
-        Review rev;
-        const string desc = "This review is a fake.";
-        const int rating = 5;
+        Review testReview;
+        const string testReviewJSON = @"{'Rating':3,'Description':'This is a fake review.'}";
 
         [TestMethod]
         public void TestReviewRating()
         {
-            rev = new Review(rating, desc);
-            Assert.AreEqual(rev.Rating, rating);
+            testReview = JsonConvert.DeserializeObject<Review>(testReviewJSON);
+            Assert.AreEqual(testReview.Rating, 3);
         }
 
         [TestMethod]
         public void TestReviewDescription()
         {
-            rev = new Review(rating, desc);
-            Assert.AreEqual(rev.Description, desc);
+            testReview = JsonConvert.DeserializeObject<Review>(testReviewJSON);
+            Assert.AreEqual(testReview.Description, "This is a fake review.");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using LibraryProject;
@@ -9,21 +11,20 @@ namespace Project0Test
     public class ReviewerTest
     {
         Reviewer reviewer;
-        const string name = "John Doe";
-        const int id = 0;
+        const string reviewerJSON = "{\"Name\":\"John Doe\",\"ID\":0}";
 
         [TestMethod]
         public void TestReviewerName()
         {
-            reviewer = new Reviewer(0, name);
-            Assert.AreEqual(reviewer.Name, name);
+            reviewer = JsonConvert.DeserializeObject<Reviewer>(reviewerJSON);
+            Assert.AreEqual(reviewer.Name, "John Doe");
         }
 
         [TestMethod]
         public void TestReviewerID()
         {
-            reviewer = new Reviewer(0, name);
-            Assert.AreEqual(reviewer.ID, id);
+            reviewer = JsonConvert.DeserializeObject<Reviewer>(reviewerJSON);
+            Assert.AreEqual(reviewer.ID, 0);
         }
     }
 }

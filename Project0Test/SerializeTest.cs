@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,23 +12,17 @@ namespace Project0Test
     [TestClass]
     public class SerializeTest
     {
+        const string testRestaurantJSON = "{\"ID\":80,\"Address\":\"8616 Cardinal Alley\",\"Phone\":\"203-677-5272\",\"City\":\"New Haven\",\"State\":\"CT\",\"Zip\":\"06510\",\"Name\":\"Krajcik Inc\",\"Reviews\":[{\"ReviewerName\":\"Nappie Colegrove\",\"Rating\":1,\"Description\":\"This is a fake review.\"}]}";
+
         [TestMethod]
         public void TestDeserializeRestaurants()
         {
             string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"];
-            int numEntries = 0;
-            using(System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
-            {
-                while(!reader.EndOfStream)
-                {
-                    reader.ReadLine();
-                    numEntries++;
-                }
-            }
+            Restaurant expectedRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
 
             List<Restaurant> list = Serializer.DeserializeList<Restaurant>(filePath);
 
-            Assert.AreEqual(list.Count, numEntries);
+            Assert.IsTrue(list[0].Equals(expectedRestaurant));
         }
 
         [TestMethod]
