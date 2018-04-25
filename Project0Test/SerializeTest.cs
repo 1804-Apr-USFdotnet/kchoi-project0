@@ -26,9 +26,19 @@ namespace Project0Test
         }
 
         [TestMethod]
-        public void TestSerializeRestaurants()
+        public void TestSerializeRestaurant()
         {
-            Assert.Fail();
+            string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"];
+            Restaurant expectedRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
+
+            Serializer.SerializeAndWrite<Restaurant>(filePath, testRestaurant, true);
+
+            Restaurant verifyRestaurant;
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
+            {
+                verifyRestaurant = JsonConvert.DeserializeObject<Restaurant>(reader.ReadLine());
+            }
+            Assert.IsTrue(verifyRestaurant.Equals(testRestaurant));
         }
     }
 }
