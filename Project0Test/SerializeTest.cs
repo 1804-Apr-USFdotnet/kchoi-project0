@@ -17,7 +17,7 @@ namespace Project0Test
         [TestMethod]
         public void TestDeserializeRestaurants()
         {
-            string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"];
+            string filePath = ConfigurationManager.AppSettings["TestDataFile"];
             Restaurant expectedRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
 
             List<Restaurant> list = (List<Restaurant>)Serializer.DeserializeList<Restaurant>(filePath);
@@ -28,7 +28,7 @@ namespace Project0Test
         [TestMethod]
         public void TestSerializeRestaurant()
         {
-            string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["TestFile"];
+            string filePath = ConfigurationManager.AppSettings["TestOutputFile"];
             Restaurant expectedRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
 
             Serializer.SerializeAndWrite<Restaurant>(filePath, expectedRestaurant, true);
