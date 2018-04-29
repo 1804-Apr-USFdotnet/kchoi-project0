@@ -28,10 +28,10 @@ namespace Project0Test
         }
 
         [TestMethod]
-        public void TestReviewReviewerName()
+        public void TestReviewReviewerID()
         {
             testReview = JsonConvert.DeserializeObject<Review>(testReviewJSON);
-            Assert.AreEqual(testReview.ReviewerName, "Perry Van Bruggen");
+            Assert.AreEqual(testReview.ReviewerID, "Perry Van Bruggen");
         }
     }
 }

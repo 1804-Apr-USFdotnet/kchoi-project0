@@ -61,7 +61,7 @@ namespace Project0Test
         public void TestRestaurantZIP()
         {
             testRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
-            Assert.AreEqual(testRestaurant.Zip, "55557");
+            Assert.AreEqual(testRestaurant.ZIP, "55557");
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace Project0Test
         public void TestRestaurantPhoneNum()
         {
             testRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
-            Assert.AreEqual(testRestaurant.Phone, "952-462-6704");
+            Assert.AreEqual(testRestaurant.PhoneNum, "952-462-6704");
         }
 
         [TestMethod]

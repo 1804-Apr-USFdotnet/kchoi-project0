@@ -8,11 +8,12 @@ namespace LibraryProject
 {
     public class Review
     {
-        private string _reviewerName;
+        private int _reviewerID;
         private int _rating;
         private string _description;
+        private int _id;
 
-        public string ReviewerName { get => _reviewerName; set => _reviewerName = value; }
+        public int ReviewerID { get => _reviewerID; set => _reviewerID = value; }
         public int Rating
         {
             get
@@ -36,6 +37,7 @@ namespace LibraryProject
             }
         }
         public string Description { get => _description; set => _description = value; }
+        public int ID { get => _id; set => _id = value; }
 
         public override bool Equals(object obj)
         {

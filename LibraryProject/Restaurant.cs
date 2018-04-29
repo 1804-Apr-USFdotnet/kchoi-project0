@@ -26,10 +26,10 @@ namespace LibraryProject
 
         public int ID { get => _id; set => _id = value; }
         public string Address { get => _address; set => _address = value; }
-        public string Phone { get => _phone; set => _phone = value; }
+        public string PhoneNum { get => _phone; set => _phone = value; }
         public string City { get => _city; set => _city = value; }
         public string State { get => _state; set => _state = value; }
-        public string Zip { get => _zip; set => _zip = value; }
+        public string ZIP { get => _zip; set => _zip = value; }
         public string Name { get => _name; set => _name = value; }
 
         public ICollection<Review> Reviews { get => _reviews; set => _reviews = (List<Review>)value; }
