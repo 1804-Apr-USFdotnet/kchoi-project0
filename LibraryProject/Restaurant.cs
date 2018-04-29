@@ -22,7 +22,7 @@ namespace LibraryProject
 
         private List<Review> _reviews = new List<Review>();
 
-        private float _avgRating;
+        private float _avgRating = 0f;
 
         public int ID { get => _id; set => _id = value; }
         public string Address { get => _address; set => _address = value; }
