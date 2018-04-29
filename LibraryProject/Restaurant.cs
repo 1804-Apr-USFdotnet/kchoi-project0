@@ -32,7 +32,7 @@ namespace LibraryProject
         public string Zip { get => _zip; set => _zip = value; }
         public string Name { get => _name; set => _name = value; }
 
-        public List<Review> Reviews { get => _reviews; set => _reviews = value; }
+        public ICollection<Review> Reviews { get => _reviews; set => _reviews = (List<Review>)value; }
 
         [JsonIgnore]
         public float AvgRating { get => _avgRating; }

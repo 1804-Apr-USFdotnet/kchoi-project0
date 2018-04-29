@@ -10,7 +10,7 @@ namespace LibraryProject
 {
     public static class Serializer
     {
-        public static void SerializeAndWriteList<T>(string fileName, List<T> objList, bool overwrite)
+        public static void SerializeAndWriteList<T>(string fileName, IEnumerable<T> objList, bool overwrite)
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, !overwrite))
             {
@@ -29,7 +29,7 @@ namespace LibraryProject
             }
         }
 
-        public static List<T> DeserializeList<T>(string fileName)
+        public static IEnumerable<T> DeserializeList<T>(string fileName)
         {
             List<T> result = new List<T>();
 

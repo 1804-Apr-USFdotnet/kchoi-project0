@@ -20,7 +20,7 @@ namespace Project0Test
             string filePath = ConfigurationManager.AppSettings["DataDirectory"] + ConfigurationManager.AppSettings["RestaurantsFile"];
             Restaurant expectedRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
 
-            List<Restaurant> list = Serializer.DeserializeList<Restaurant>(filePath);
+            List<Restaurant> list = (List<Restaurant>)Serializer.DeserializeList<Restaurant>(filePath);
 
             Assert.AreEqual(list[0], expectedRestaurant);
         }

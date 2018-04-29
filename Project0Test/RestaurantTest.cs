@@ -93,7 +93,7 @@ namespace Project0Test
                 Assert.Fail("failed to add review");
             } else
             {
-                Assert.AreEqual(testReview, testRestaurant.Reviews[0]);
+                Assert.AreEqual(testReview, ((List<Restaurant>)testRestaurant.Reviews)[0]);
             }
         }
 
