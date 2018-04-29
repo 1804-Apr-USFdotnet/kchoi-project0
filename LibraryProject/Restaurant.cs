@@ -60,7 +60,7 @@ namespace LibraryProject
 
             foreach(Review review in Reviews)
             {
-                _avgRating += review.Rating;
+                _avgRating += (float)review.Rating;
             }
 
             _avgRating /= Reviews.Count;
