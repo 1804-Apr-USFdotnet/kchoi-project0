@@ -39,25 +39,17 @@ namespace LibraryProject
 
         public override bool Equals(object obj)
         {
-            bool result = true;
-            Review testObj = null;
+            return GetHashCode() == obj.GetHashCode();
+        }
 
-            try
-            {
-                testObj = (Review)obj;
-            } catch(InvalidCastException e)
-            {
-                result = false;
-            }
-
-            if (result)
-            {
-                result = ReviewerName.Equals(testObj.ReviewerName)
-                  && Rating.Equals(testObj.Rating)
-                  && Description.Equals(testObj.Description);
-            }
-
-            return result;
+        public override int GetHashCode()
+        {
+            var hashCode = 795980842;
+            hashCode = hashCode * -1521134295 + ID.GetHashCode();
+            hashCode = hashCode * -1521134295 + ReviewerID.GetHashCode();
+            hashCode = hashCode * -1521134295 + Rating.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
+            return hashCode;
         }
     }
 }

@@ -16,24 +16,15 @@ namespace LibraryProject
 
         public override bool Equals(object obj)
         {
-            bool result = true;
-            Reviewer testObj = null;
+            return GetHashCode() == obj.GetHashCode();
+        }
 
-            try
-            {
-                testObj = (Reviewer)obj;
-            } catch(InvalidCastException e)
-            {
-                result = false;
-            }
-
-            if (result)
-            {
-                result = Name.Equals(testObj.Name)
-                    && ID.Equals(testObj.ID);
-            }
-
-            return result;
+        public override int GetHashCode()
+        {
+            var hashCode = 1997165910;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + ID.GetHashCode();
+            return hashCode;
         }
     }
 }

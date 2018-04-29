@@ -73,7 +73,7 @@ namespace Project0Test
 
             testRestaurant.Reviews.Add(testReview);
 
-            Assert.IsTrue(testRestaurant.Reviews.Count == 1 && testRestaurant.Reviews[0].Rating == rating);
+            Assert.AreEqual(testReview, ((List<Restaurant>)testRestaurant.Reviews)[0]);
         }
 
         [TestMethod]

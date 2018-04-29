@@ -68,42 +68,18 @@ namespace LibraryProject
 
         public override bool Equals(object obj)
         {
-            bool result = true;
-            Restaurant testObj = null;
-
-            try
-            {
-                testObj = (Restaurant)obj;
-            } catch (InvalidCastException e)
-            {
-                result = false;
-            }
+            bool result = GetHashCode() == obj.GetHashCode();
 
             if (result)
             {
-                result = ID.Equals(testObj.ID)
-                    && Address.Equals(testObj.Address)
-                    && Phone.Equals(testObj.Phone)
-                    && City.Equals(testObj.City)
-                    && State.Equals(testObj.State)
-                    && Zip.Equals(testObj.Zip)
-                    && Name.Equals(testObj.Name);
+                result = Reviews.Count == ((Restaurant)obj).Reviews.Count;
 
                 if (result)
                 {
                     for (int i = 0; i < Reviews.Count; i++)
                     {
-                        if (testObj.Reviews[i] != null)
+                        if (!(result = Reviews.ElementAt(i).Equals(((Restaurant)obj).Reviews.ElementAt(i))))
                         {
-                            if (!Reviews[i].Equals(testObj.Reviews[i]))
-                            {
-                                result = false;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            result = false;
                             break;
                         }
                     }
@@ -111,6 +87,20 @@ namespace LibraryProject
             }
 
             return result;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1381076286;
+            hashCode = hashCode * -1521134295 + ID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Address);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PhoneNum);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(State);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ZIP);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + AvgRating.GetHashCode();
+            return hashCode;
         }
     }
 }
