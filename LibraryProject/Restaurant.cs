@@ -37,17 +37,17 @@ namespace LibraryProject
         [JsonIgnore]
         public float AvgRating { get => _avgRating; }
 
-        public bool AddReview(Review NewReview)
+        public bool AddReview(Review newReview)
         {
             bool result;
             int count = Reviews.Count;
 
-            Reviews.Add(NewReview);
+            Reviews.Add(newReview);
 
             if ((result = Reviews.Count == count + 1))
             {
                 _avgRating *= count;
-                _avgRating += NewReview.Rating;
+                _avgRating += (float)newReview.Rating;
                 _avgRating /= (count + 1);
             }
 
