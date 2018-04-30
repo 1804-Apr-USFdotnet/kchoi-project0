@@ -45,9 +45,55 @@ namespace DataProject
         {
             using (db = new RestaurantReviewsEntities())
             {
-                ICollection<Restaurant> result = db.Restaurants.Include("Reviews").ToList();
+                return db.Restaurants.Include("Reviews").ToList();
+            }
+        }
 
-                return result;
+        public static ICollection<Review> FindReviewsByRestaurantID(int restID)
+        {
+            using(db = new RestaurantReviewsEntities())
+            {
+                return db.Reviews.Where(x => x.RestaurantID == restID).ToList();
+            }
+        }
+
+        public static Restaurant FindRestaurantByID(int id)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Restaurants.Find(id);
+            }
+        }
+
+        public static ICollection<Restaurant> FindRestaurantsByName(string key)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Restaurants.Where(x => x.Name.Contains(key)).Include("Reviews").ToList();
+            }
+        }
+
+        public static ICollection<Restaurant> ReadRestaurantsSortByRating()
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Restaurants.OrderByDescending(x => x.AvgRating).Include("Reviews").ToList();
+            }
+        }
+
+        public static ICollection<Restaurant> ReadRestaurantsSortByName()
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Restaurants.OrderByDescending(x => x.Name).Include("Reviews").ToList();
+            }
+        }
+
+        public static ICollection<Restaurant> ReadRestaurantsSortByRating(int count)
+        {
+            using(db = new RestaurantReviewsEntities())
+            {
+                return db.Restaurants.OrderByDescending(x => x.AvgRating).Take(count).Include("Reviews").ToList();
             }
         }
 
@@ -70,7 +116,7 @@ namespace DataProject
                 Review oldReview;
                 int i = 0;
                 while (i <  oldRestaurant.Reviews.Count)
-                {//TODO: foreach iterator not modification safe
+                {
                     oldReview = oldRestaurant.Reviews.ElementAt(i);
                     tmpReview = newRestaurant.Reviews.Where(x => x.ID == oldReview.ID).FirstOrDefault();
                     if (tmpReview != null)
