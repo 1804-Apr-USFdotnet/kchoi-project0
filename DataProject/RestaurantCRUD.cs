@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NLog;
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -15,6 +17,9 @@ namespace DataProject
         {
             using (db = new RestaurantReviewsEntities())
             {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
                 db.Restaurants.Add(restaurant);
 
                 try
@@ -23,20 +28,32 @@ namespace DataProject
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException e)
                 {
+                    msg.Append(restaurant.Name)
+                        .Append("\n--\n");
+
                     foreach (var eve in e.EntityValidationErrors)
                     {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                           eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        msg.Append("Entity of type \"")
+                            .Append(eve.Entry.Entity.GetType().Name)
+                            .Append("\" in state \"")
+                            .Append(eve.Entry.State)
+                            .Append("\" has the following validation errors:\n");
 
                         foreach (var ve in eve.ValidationErrors)
                         {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
+                            msg.Append("- Property: \"")
+                                .Append(ve.PropertyName)
+                                .Append("\", Error: \"")
+                                .Append(ve.ErrorMessage)
+                                .Append("\"\n");
                         }
                     }
 
-                    Console.WriteLine(restaurant.Name);
-                    throw;
+                    FinishExceptionHandling(log, e, msg.ToString());
+                }
+                catch (Exception ex)
+                {
+                    FinishExceptionHandling(log, ex, ex.StackTrace);
                 }
             }
         }
@@ -101,6 +118,9 @@ namespace DataProject
         {
             using (db = new RestaurantReviewsEntities())
             {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
                 Restaurant oldRestaurant = db.Restaurants.Find(newRestaurant.ID);
 
                 oldRestaurant.Address = newRestaurant.Address;
@@ -147,18 +167,32 @@ namespace DataProject
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException e)
                 {
+                    msg.Append(newRestaurant.Name)
+                        .Append("\n--\n");
+
                     foreach (var eve in e.EntityValidationErrors)
                     {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                           eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        msg.Append("Entity of type \"")
+                            .Append(eve.Entry.Entity.GetType().Name)
+                            .Append("\" in state \"")
+                            .Append(eve.Entry.State)
+                            .Append("\" has the following validation errors:\n");
 
                         foreach (var ve in eve.ValidationErrors)
                         {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
+                            msg.Append("- Property: \"")
+                                .Append(ve.PropertyName)
+                                .Append("\", Error: \"")
+                                .Append(ve.ErrorMessage)
+                                .Append("\"\n");
                         }
                     }
-                    throw;
+
+                    FinishExceptionHandling(log, e, msg.ToString());
+                }
+                catch (Exception ex)
+                {
+                    FinishExceptionHandling(log, ex, ex.StackTrace);
                 }
             }
         }
@@ -167,6 +201,9 @@ namespace DataProject
         {
             using (db = new RestaurantReviewsEntities())
             {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
                 int count = db.Restaurants.Count();
 
                 db.Restaurants.Remove(restaurant);
@@ -177,22 +214,43 @@ namespace DataProject
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException e)
                 {
+                    msg.Append(restaurant.Name)
+                        .Append("\n--\n");
+
                     foreach (var eve in e.EntityValidationErrors)
                     {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                           eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        msg.Append("Entity of type \"")
+                            .Append(eve.Entry.Entity.GetType().Name)
+                            .Append("\" in state \"")
+                            .Append(eve.Entry.State)
+                            .Append("\" has the following validation errors:\n");
 
                         foreach (var ve in eve.ValidationErrors)
                         {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
+                            msg.Append("- Property: \"")
+                                .Append(ve.PropertyName)
+                                .Append("\", Error: \"")
+                                .Append(ve.ErrorMessage)
+                                .Append("\"\n");
                         }
                     }
-                    throw;
+
+                    FinishExceptionHandling(log, e, msg.ToString());
+                }
+                catch(Exception ex)
+                {
+                    FinishExceptionHandling(log, ex, ex.StackTrace);
                 }
 
                 return count == db.Restaurants.Count() + 1;
             }
+        }
+
+        private static void FinishExceptionHandling(Logger log, Exception e, string msg)
+        {
+            log.Error(e, msg.ToString());
+
+            Console.WriteLine("Error! Results not saved - check the log file for details.");
         }
     }
 }

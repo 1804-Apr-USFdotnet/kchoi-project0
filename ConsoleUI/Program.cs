@@ -1,9 +1,12 @@
-﻿using System;
+﻿using NLog;
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using DataProject;
 using LibraryProject;
 
@@ -34,70 +37,78 @@ namespace ConsoleUI
             //            }
             #endregion
 
+            Logger log = LogManager.GetCurrentClassLogger();
             ICollection<LibraryProject.Restaurant> list;
             int menuSelection, targetID;
             string name;
             LibraryProject.Restaurant rest;
-            while((menuSelection = GetMenuSelection()) != 6)
+
+            while ((menuSelection = GetMenuSelection()) != 6)
             {
-                Console.WriteLine("-----------");
-
-                switch(menuSelection)
+                try
                 {
-                    case 1:
-                        list = Converter.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurantsSortByRating(3));
-                        Console.WriteLine("Restaurant Name: Average Rating");
-                        foreach(LibraryProject.Restaurant restaurant in list)
-                        {
-                            Console.WriteLine(restaurant.Name + ": " + restaurant.AvgRating);
-                        }
+                    Console.WriteLine("-----------");
 
-                        break;
-                    case 2:
-                        list = Converter.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants());
-                        Console.WriteLine("Restaurant Name");
-                        foreach (LibraryProject.Restaurant restaurant in list)
-                        {
-                            Console.WriteLine(restaurant.Name);
-                        }
-                        
-                        break;
-                    case 3:
-                        Console.WriteLine("Enter the Restaurant ID: ");
-                        targetID = int.Parse(Console.ReadLine());
-                        rest = Converter.ConvertRestaurantFromDB(RestaurantCRUD.FindRestaurantByID(targetID));
-                        Console.WriteLine("Name: " + rest.Name);
-                        Console.WriteLine("Average Rating: " + rest.AvgRating);
-                        Console.WriteLine("Address: " + rest.Address);
-                        Console.WriteLine("City: " + rest.City);
-                        Console.WriteLine("State: " + rest.State);
-                        Console.WriteLine("ZIP: " + rest.ZIP);
-                        Console.WriteLine("Phone #: " + rest.PhoneNum);
+                    switch (menuSelection)
+                    {
+                        case 1:
+                            list = Converter.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurantsSortByRating(3));
+                            Console.WriteLine("Restaurant Name: Average Rating");
+                            foreach (LibraryProject.Restaurant restaurant in list)
+                            {
+                                Console.WriteLine(restaurant.Name + ": " + restaurant.AvgRating);
+                            }
 
-                        break;
-                    case 4:
-                        Console.WriteLine("Enter the Restaurant ID: ");
-                        targetID = int.Parse(Console.ReadLine());
-                        ICollection<LibraryProject.Review> revs = Converter.ConvertReviewListFromDB(RestaurantCRUD.FindReviewsByRestaurantID(targetID));
-                        foreach(LibraryProject.Review review in revs)
-                        {
-                            Console.WriteLine(review.Rating + " " + review.Description);
-                        }
+                            break;
+                        case 2:
+                            list = Converter.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants());
+                            Console.WriteLine("Restaurant Name");
+                            foreach (LibraryProject.Restaurant restaurant in list)
+                            {
+                                Console.WriteLine(restaurant.Name);
+                            }
 
-                        break;
-                    case 5:
-                        Console.WriteLine("Enter the Restaurant name: ");
-                        name = Console.ReadLine();
-                        list = Converter.ConvertRestaurantListFromDB(RestaurantCRUD.FindRestaurantsByName(name));
-                        foreach(LibraryProject.Restaurant rest1 in list)
-                        {
-                            Console.WriteLine(rest1.Name);
-                        }
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter the Restaurant ID: ");
+                            targetID = int.Parse(Console.ReadLine());
+                            rest = Converter.ConvertRestaurantFromDB(RestaurantCRUD.FindRestaurantByID(targetID));
+                            Console.WriteLine("Name: " + rest.Name);
+                            Console.WriteLine("Average Rating: " + rest.AvgRating);
+                            Console.WriteLine("Address: " + rest.Address);
+                            Console.WriteLine("City: " + rest.City);
+                            Console.WriteLine("State: " + rest.State);
+                            Console.WriteLine("ZIP: " + rest.ZIP);
+                            Console.WriteLine("Phone #: " + rest.PhoneNum);
 
-                        break;
+                            break;
+                        case 4:
+                            Console.WriteLine("Enter the Restaurant ID: ");
+                            targetID = int.Parse(Console.ReadLine());
+                            ICollection<LibraryProject.Review> revs = Converter.ConvertReviewListFromDB(RestaurantCRUD.FindReviewsByRestaurantID(targetID));
+                            foreach (LibraryProject.Review review in revs)
+                            {
+                                Console.WriteLine(review.Rating + " " + review.Description);
+                            }
+
+                            break;
+                        case 5:
+                            Console.WriteLine("Enter the Restaurant name: ");
+                            name = Console.ReadLine();
+                            list = Converter.ConvertRestaurantListFromDB(RestaurantCRUD.FindRestaurantsByName(name));
+                            foreach (LibraryProject.Restaurant rest1 in list)
+                            {
+                                Console.WriteLine(rest1.Name);
+                            }
+
+                            break;
+                    }
+
+                    Console.WriteLine();
+                } catch(Exception e)
+                {
+                    log.Error(e, e.StackTrace);
                 }
-
-                Console.WriteLine();
             }
         }
 
