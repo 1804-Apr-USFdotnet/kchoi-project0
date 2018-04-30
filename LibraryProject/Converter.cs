@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataProject;
 
 namespace LibraryProject
 {
@@ -30,6 +31,29 @@ namespace LibraryProject
             return result;
         }
 
+        public static ICollection<Restaurant> ConvertRestaurantListFromDB(ICollection<DataProject.Restaurant> dbList)
+        {
+            ICollection<Restaurant> result = new List<Restaurant>();
+
+            foreach(DataProject.Restaurant res in dbList)
+            {
+                result.Add(ConvertRestaurantFromDB(res));
+            }
+
+            return result;
+        }
+
+        public static ICollection<DataProject.Restaurant> ConvertRestaurantListToDB(ICollection<Restaurant> list)
+        {
+            ICollection<DataProject.Restaurant> result = new List<DataProject.Restaurant>();
+
+            foreach (Restaurant res in list)
+            {
+                result.Add(ConvertRestaurantToDB(res));
+            }
+
+            return result;
+        }
         public static DataProject.Restaurant ConvertRestaurantToDB(Restaurant restaurant)
         {
             DataProject.Restaurant result = new DataProject.Restaurant
@@ -74,6 +98,17 @@ namespace LibraryProject
                 ReviewerID = review.ReviewerID,
                 ID = review.ID
             };
+
+            return result;
+        }
+
+        public static ICollection<Review> ConvertReviewListFromDB(ICollection<DataProject.Review> collection)
+        {
+            List<Review> result = new List<Review>();
+            foreach(DataProject.Review rev in collection)
+            {
+                result.Add(ConvertReviewFromDB(rev));
+            }
 
             return result;
         }
