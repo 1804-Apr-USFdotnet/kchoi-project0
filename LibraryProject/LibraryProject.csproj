@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter.cs" />
-    <Compile Include="RestaurantUtils.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Interfaces\IReviewable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
