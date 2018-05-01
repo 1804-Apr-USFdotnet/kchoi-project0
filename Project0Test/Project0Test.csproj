@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConverterTest.cs" />
     <Compile Include="RestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewTest.cs" />
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\ConsoleUI\ClientProject.csproj">
       <Project>{3ff7e73d-52eb-4dd9-beed-ac94d546a1c9}</Project>
       <Name>ClientProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataProject\DataProject.csproj">
+      <Project>{fe5c522a-6bce-453f-bee8-d60f01b64b8b}</Project>
+      <Name>DataProject</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibraryProject\LibraryProject.csproj">
       <Project>{62d5cdcf-15f0-40a4-9b52-908e335be531}</Project>
