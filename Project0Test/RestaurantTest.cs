@@ -68,7 +68,6 @@ namespace Project0Test
         public void TestRestaurantReviews()
         {
             testRestaurant = JsonConvert.DeserializeObject<Restaurant>(testRestaurantJSON);
-            int rating = 5;
             testReview = JsonConvert.DeserializeObject<Review>(testReviewJSON);
 
             testRestaurant.Reviews.Add(testReview);
