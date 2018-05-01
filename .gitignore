@@ -176,6 +176,9 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+[Cc]onsoleUI/Content
+[Cc]onsoleUI/Scripts
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
