@@ -12,6 +12,7 @@ namespace LibraryProject
         private int _rating;
         private string _description;
         private int _id;
+        private int _restaurantID;
 
         public int ReviewerID { get => _reviewerID; set => _reviewerID = value; }
         public int Rating
@@ -38,6 +39,7 @@ namespace LibraryProject
         }
         public string Description { get => _description; set => _description = value; }
         public int ID { get => _id; set => _id = value; }
+        public int RestaurantID { get => _restaurantID; set => _restaurantID = value; }
 
         public override bool Equals(object obj)
         {

@@ -82,8 +82,9 @@ namespace LibraryProject
             {
                 Description = dbReview.Description,
                 Rating = (int)dbReview.Rating,
-                ReviewerID = (int)dbReview.ReviewerID,
-                ID = dbReview.ID
+                ReviewerID = (dbReview.ReviewerID != null ? (int)dbReview.ReviewerID : -1),
+                ID = dbReview.ID,
+                RestaurantID = dbReview.RestaurantID
             };
 
             return result;
@@ -95,9 +96,13 @@ namespace LibraryProject
             {
                 Description = review.Description.Substring(0,Math.Min(200,review.Description.Length)),
                 Rating = review.Rating,
-                ReviewerID = review.ReviewerID,
-                ID = review.ID
+                ID = review.ID,
+                RestaurantID = review.RestaurantID
             };
+            if(review.ReviewerID > 0)
+            {
+                result.ReviewerID = review.ReviewerID;
+            }
 
             return result;
         }
