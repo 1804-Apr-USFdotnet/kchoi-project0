@@ -51,7 +51,7 @@ namespace ConsoleUI
                     switch (menuSelection)
                     {
                         case 1:
-                            list = CRUDBusinessWrapper.ReadRestaurantsSortByRating(3);
+                            list = Mapper.GetRestaurantsSortByRating(3);
                             Console.WriteLine("Restaurant Name: Average Rating");
                             foreach (Restaurant restaurant in list)
                             {
@@ -60,7 +60,7 @@ namespace ConsoleUI
 
                             break;
                         case 2:
-                            list = CRUDBusinessWrapper.ReadRestaurantsSortByName();
+                            list = Mapper.GetRestaurantsSortByName();
                             Console.WriteLine("Restaurant Name");
                             foreach (Restaurant restaurant in list)
                             {
@@ -71,7 +71,7 @@ namespace ConsoleUI
                         case 3:
                             Console.WriteLine("Enter the Restaurant ID: ");
                             targetID = int.Parse(Console.ReadLine());
-                            rest = CRUDBusinessWrapper.FindRestaurantByID(targetID);
+                            rest = Mapper.FindRestaurantByID(targetID);
                             Console.WriteLine("Name: " + rest.Name);
                             Console.WriteLine("Average Rating: " + rest.AvgRating);
                             Console.WriteLine("Address: " + rest.Address);
@@ -84,7 +84,7 @@ namespace ConsoleUI
                         case 4:
                             Console.WriteLine("Enter the Restaurant ID: ");
                             targetID = int.Parse(Console.ReadLine());
-                            ICollection<Review> revs = CRUDBusinessWrapper.FindReviewsByRestaurantID(targetID);
+                            ICollection<Review> revs = Mapper.FindReviewsByRestaurantID(targetID);
                             foreach (Review review in revs)
                             {
                                 Console.WriteLine(review.Rating + " " + review.Description);
@@ -94,7 +94,7 @@ namespace ConsoleUI
                         case 5:
                             Console.WriteLine("Enter the Restaurant name: ");
                             name = Console.ReadLine();
-                            list = CRUDBusinessWrapper.FindRestaurantsByName(name);
+                            list = Mapper.FindRestaurantsByName(name);
                             foreach (Restaurant rest1 in list)
                             {
                                 Console.WriteLine(rest1.Name);
