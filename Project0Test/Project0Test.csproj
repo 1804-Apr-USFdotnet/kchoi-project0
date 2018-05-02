@@ -52,7 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConverterTest.cs" />
+    <Compile Include="MapperTest.cs" />
     <Compile Include="RestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewTest.cs" />

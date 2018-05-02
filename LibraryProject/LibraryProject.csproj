@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter.cs" />
+    <Compile Include="Mapper.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Interfaces\IReviewable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
