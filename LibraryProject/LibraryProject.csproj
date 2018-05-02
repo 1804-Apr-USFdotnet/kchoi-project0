@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRUDBusinessWrapper.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Interfaces\IReviewable.cs" />

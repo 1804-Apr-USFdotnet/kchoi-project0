@@ -54,6 +54,7 @@ namespace LibraryProject
 
             return result;
         }
+
         public static DataProject.Restaurant ConvertRestaurantToDB(Restaurant restaurant)
         {
             DataProject.Restaurant result = new DataProject.Restaurant
