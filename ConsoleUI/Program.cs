@@ -107,6 +107,8 @@ namespace ConsoleUI
                 } catch(Exception e)
                 {
                     log.Error(e, e.StackTrace);
+
+                    Console.WriteLine("Unexpected error occurred! Please check the log file and try again.");
                 }
             }
         }
