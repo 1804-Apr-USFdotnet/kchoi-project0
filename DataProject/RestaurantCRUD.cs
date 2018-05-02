@@ -1,11 +1,9 @@
 ﻿using NLog;
 
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DataProject
 {
@@ -58,59 +56,11 @@ namespace DataProject
             }
         }
 
-        public static ICollection<Restaurant> ReadRestaurants()
+        public static DbSet<Restaurant> ReadRestaurants()
         {
             using (db = new RestaurantReviewsEntities())
             {
-                return db.Restaurants.Include("Reviews").ToList();
-            }
-        }
-
-        public static ICollection<Review> FindReviewsByRestaurantID(int restID)
-        {
-            using(db = new RestaurantReviewsEntities())
-            {
-                return db.Reviews.Where(x => x.RestaurantID == restID).ToList();
-            }
-        }
-
-        public static Restaurant FindRestaurantByID(int id)
-        {
-            using (db = new RestaurantReviewsEntities())
-            {
-                return db.Restaurants.Find(id);
-            }
-        }
-
-        public static ICollection<Restaurant> FindRestaurantsByName(string key)
-        {
-            using (db = new RestaurantReviewsEntities())
-            {
-                return db.Restaurants.Where(x => x.Name.Contains(key)).Include("Reviews").ToList();
-            }
-        }
-
-        public static ICollection<Restaurant> ReadRestaurantsSortByRating()
-        {
-            using (db = new RestaurantReviewsEntities())
-            {
-                return db.Restaurants.OrderByDescending(x => x.AvgRating).Include("Reviews").ToList();
-            }
-        }
-
-        public static ICollection<Restaurant> ReadRestaurantsSortByRating(int count)
-        {
-            using(db = new RestaurantReviewsEntities())
-            {
-                return db.Restaurants.OrderByDescending(x => x.AvgRating).Take(count).Include("Reviews").ToList();
-            }
-        }
-
-        public static ICollection<Restaurant> ReadRestaurantsSortByName()
-        {
-            using (db = new RestaurantReviewsEntities())
-            {
-                return db.Restaurants.OrderBy(x => x.Name).Include("Reviews").ToList();
+                return db.Restaurants;
             }
         }
 
@@ -197,16 +147,26 @@ namespace DataProject
             }
         }
 
-        public static bool DeleteRestaurant(Restaurant restaurant)
+        public static DbSet<Review> ReadReviews()
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Reviews;
+            }
+        }
+
+        public static void DeleteRestaurant(Restaurant restaurant)
         {
             using (db = new RestaurantReviewsEntities())
             {
                 Logger log = LogManager.GetCurrentClassLogger();
                 StringBuilder msg = new StringBuilder();
 
-                int count = db.Restaurants.Count();
-
                 db.Restaurants.Remove(restaurant);
+                foreach(Review rev in restaurant.Reviews)
+                {
+                    db.Reviews.Remove(rev);
+                }
 
                 try
                 {
@@ -241,16 +201,12 @@ namespace DataProject
                 {
                     FinishExceptionHandling(log, ex, ex.StackTrace);
                 }
-
-                return count == db.Restaurants.Count() + 1;
             }
         }
 
         private static void FinishExceptionHandling(Logger log, Exception e, string msg)
         {
             log.Error(e, msg.ToString());
-
-            Console.WriteLine("Error! Results not saved - check the log file for details.");
         }
     }
 }

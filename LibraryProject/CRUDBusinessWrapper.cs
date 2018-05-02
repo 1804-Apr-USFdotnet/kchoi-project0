@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using DataProject;
+﻿using System.Collections.Generic;
 
 namespace LibraryProject
 {
@@ -12,32 +6,32 @@ namespace LibraryProject
     {
         public static ICollection<Restaurant> ReadRestaurantsSortByRating(int count)
         {
-            return Mapper.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurantsSortByRating(count));
+            return Mapper.GetRestaurantsSortByRating(count);
         }
 
         public static ICollection<Restaurant> ReadRestaurants()
         {
-            return Mapper.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants());
+            return Mapper.GetRestaurants();
         }
 
         public static ICollection<Restaurant> ReadRestaurantsSortByName()
         {
-            return Mapper.ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurantsSortByName());
+            return Mapper.GetRestaurantsSortByName();
         }
 
         public static Restaurant FindRestaurantByID(int targetID)
         {
-            return Mapper.ConvertRestaurantFromDB(RestaurantCRUD.FindRestaurantByID(targetID));
+            return Mapper.FindRestaurantByID(targetID);
         }
 
         public static ICollection<Review> FindReviewsByRestaurantID(int targetID)
         {
-            return Mapper.ConvertReviewListFromDB(RestaurantCRUD.FindReviewsByRestaurantID(targetID));
+            return Mapper.FindReviewsByRestaurantID(targetID);
         }
 
         public static ICollection<Restaurant> FindRestaurantsByName(string name)
         {
-            return Mapper.ConvertRestaurantListFromDB(RestaurantCRUD.FindRestaurantsByName(name));
+            return Mapper.FindRestaurantsByName(name);
         }
     }
 }

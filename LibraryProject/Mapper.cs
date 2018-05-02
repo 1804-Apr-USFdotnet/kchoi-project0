@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataProject;
 
 namespace LibraryProject
@@ -117,6 +116,41 @@ namespace LibraryProject
             }
 
             return result;
+        }
+
+        public static ICollection<Review> FindReviewsByRestaurantID(int restID)
+        {
+            return ConvertReviewListFromDB(RestaurantCRUD.ReadReviews().Where(x => x.RestaurantID == restID).ToList());
+        }
+
+        public static Restaurant FindRestaurantByID(int id)
+        {
+            return ConvertRestaurantFromDB(RestaurantCRUD.ReadRestaurants().Find(id));
+        }
+
+        public static ICollection<Restaurant> FindRestaurantsByName(string key)
+        {
+            return ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants().Where(x => x.Name.Contains(key)).Include("Reviews").ToList());
+        }
+
+        public static ICollection<Restaurant> GetRestaurantsSortByRating()
+        {
+            return ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants().OrderByDescending(x => x.AvgRating).Include("Reviews").ToList());
+        }
+
+        public static ICollection<Restaurant> GetRestaurantsSortByRating(int count)
+        {
+            return ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants().OrderByDescending(x => x.AvgRating).Take(count).Include("Reviews").ToList());
+        }
+
+        public static ICollection<Restaurant> GetRestaurantsSortByName()
+        {
+            return ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants().OrderBy(x => x.Name).Include("Reviews").ToList());
+        }
+
+        public static ICollection<Restaurant> GetRestaurants()
+        {
+            return ConvertRestaurantListFromDB(RestaurantCRUD.ReadRestaurants().Include("Reviews").ToList());
         }
     }
 }
