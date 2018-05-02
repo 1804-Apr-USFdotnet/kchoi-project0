@@ -98,19 +98,19 @@ namespace DataProject
             }
         }
 
-        public static ICollection<Restaurant> ReadRestaurantsSortByName()
-        {
-            using (db = new RestaurantReviewsEntities())
-            {
-                return db.Restaurants.OrderByDescending(x => x.Name).Include("Reviews").ToList();
-            }
-        }
-
         public static ICollection<Restaurant> ReadRestaurantsSortByRating(int count)
         {
             using(db = new RestaurantReviewsEntities())
             {
                 return db.Restaurants.OrderByDescending(x => x.AvgRating).Take(count).Include("Reviews").ToList();
+            }
+        }
+
+        public static ICollection<Restaurant> ReadRestaurantsSortByName()
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Restaurants.OrderBy(x => x.Name).Include("Reviews").ToList();
             }
         }
 
@@ -160,7 +160,7 @@ namespace DataProject
                         oldRestaurant.Reviews.Add(newReview);
                     }
                 }
-                
+
                 try
                 {
                     db.SaveChanges();
