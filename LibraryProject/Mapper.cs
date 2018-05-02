@@ -7,7 +7,7 @@ using DataProject;
 
 namespace LibraryProject
 {
-    public static class Converter
+    public static class Mapper
     {
         public static Restaurant ConvertRestaurantFromDB(DataProject.Restaurant dbRestaurant)
         {

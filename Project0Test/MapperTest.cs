@@ -8,7 +8,7 @@ using LibraryProject;
 namespace Project0Test
 {
     [TestClass]
-    public class ConverterTest
+    public class MapperTest
     {
         private static DataProject.Restaurant dbRest;
         private static LibraryProject.Restaurant blRest;
@@ -48,7 +48,7 @@ namespace Project0Test
             };
             dbRest.Reviews.Add(dbRev);
 
-            blRest = Converter.ConvertRestaurantFromDB(dbRest);
+            blRest = Mapper.ConvertRestaurantFromDB(dbRest);
             blRev = ((List<LibraryProject.Review>)blRest.Reviews)[0];
 
             Assert.AreEqual(dbRest.Address, blRest.Address, "Address: \""+dbRest.Address+"\" \"" + blRest.Address + '"');
@@ -88,7 +88,7 @@ namespace Project0Test
             };
             blRest.Reviews.Add(blRev);
 
-            dbRest = Converter.ConvertRestaurantToDB(blRest);
+            dbRest = Mapper.ConvertRestaurantToDB(blRest);
             dbRev = ((List<DataProject.Review>)dbRest.Reviews)[0];
 
             Assert.AreEqual(dbRest.Address, blRest.Address, "Address: \"" + dbRest.Address + "\" \"" + blRest.Address + '"');
@@ -130,7 +130,7 @@ namespace Project0Test
             blRest.Reviews.Add(blRev);
             blList.Add(blRest);
 
-            ICollection<DataProject.Restaurant> dbList = Converter.ConvertRestaurantListToDB(blList);
+            ICollection<DataProject.Restaurant> dbList = Mapper.ConvertRestaurantListToDB(blList);
 
             if(dbList.Count != blList.Count)
             {
@@ -189,7 +189,7 @@ namespace Project0Test
             dbRest.Reviews.Add(dbRev);
             dbList.Add(dbRest);
 
-            ICollection<LibraryProject.Restaurant> blList = Converter.ConvertRestaurantListFromDB(dbList);
+            ICollection<LibraryProject.Restaurant> blList = Mapper.ConvertRestaurantListFromDB(dbList);
 
             if (dbList.Count != blList.Count)
             {
